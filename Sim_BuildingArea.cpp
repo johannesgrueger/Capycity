@@ -24,6 +24,8 @@ Sim_BuildingArea::Sim_BuildingArea(int length, int width)
 
 Sim_BuildingArea::~Sim_BuildingArea()
 {
+	for (int i = 0; i < areaLength; i++)
+		delete[] buildingAreaArr[i];
 	delete[] buildingAreaArr;
 }
 
