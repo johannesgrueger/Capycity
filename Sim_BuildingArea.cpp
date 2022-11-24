@@ -64,6 +64,9 @@ bool Sim_BuildingArea::testBuilding()
 		cout << "invalid Input!" << endl;
 		fitting = false;
 	}
+	if (posX < 0 || posY < 0 || bWidth < 0 || bLength < 0) {
+		fitting = false;
+	}
 	if (posX + bWidth > areaWidth) {
 		fitting = false;
 	}
