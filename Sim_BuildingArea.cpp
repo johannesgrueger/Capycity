@@ -100,15 +100,20 @@ void Sim_BuildingArea::deleteArea()
 	cin >> bLength;
 	cout << "Please insert Size (width):" << endl;
 	cin >> bWidth;
-
-	for (size_t i = posY; i < posY+bLength; i++)
-	{
-		for (size_t j = posY; j < posX+bWidth; j++)
+	
+	if (posX > 0 || posY > 0 || bWidth > 0 || bLength > 0) {
+		for (size_t i = posY; i < posY + bLength; i++)
 		{
-			buildingAreaArr[i][j] = BuildingType(0);
+			for (size_t j = posY; j < posX + bWidth; j++)
+			{
+				buildingAreaArr[i][j] = BuildingType(0);
+			}
 		}
+		cout << "Area deleted!" << endl;
 	}
-	cout << "Area deleted!" << endl;
+	else {
+		cout << "invalid Input" << endl;
+	}
 }
 
 void Sim_BuildingArea::printBuildingPlan()
