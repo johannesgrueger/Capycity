@@ -1,23 +1,25 @@
 #include "Sim_BuildingArea.h"
+#include "Buildings.h"
 #include <iostream>
 
 using namespace Sim_Capycity;
 using namespace std;
+using namespace Build;
 
 Sim_BuildingArea::Sim_BuildingArea(int length, int width)
 {
 	areaLength = length;
 	areaWidth = width;
-	buildingAreaArr = new BuildingType*[areaLength];
+	buildingAreaArr = new Building*[areaLength];
 	for (size_t i = 0; i < areaLength; i++)
 	{
-		buildingAreaArr[i] = new BuildingType[areaWidth];
+		buildingAreaArr[i] = new Building[areaWidth];
 	}
 	for (size_t i = 0; i < areaLength; i++)
 	{
 		for (size_t j = 0; j < areaWidth; j++)
 		{
-			buildingAreaArr[i][j] = BuildingType(0);
+			buildingAreaArr[i][j] = new Leerstehend();
 		}
 	}
 }
@@ -31,9 +33,6 @@ Sim_BuildingArea::~Sim_BuildingArea()
 
 void Sim_BuildingArea::newBuilding()
 {
-	cout << "Please insert Building Type (1='Wasserkraft', 2='Windkraft', 3='Solar'):" << endl;
-	cin >> temp;
-	bType = BuildingType(temp);
 	cout << "Please insert Position (posY): " << endl;
 	cin >> posY;
 	cout << "Please insert Position (posX): " << endl;
@@ -43,15 +42,40 @@ void Sim_BuildingArea::newBuilding()
 	cout << "Please insert Building Length: " << endl;
 	cin >> bLength;
 
+	cout << "Please insert Building Type (W='Wasserkraft', X='Windkraft', S='Solar'):" << endl;
+	cin >> temp;
+
 	if (testBuilding()) {
-		for (size_t i = posY; i < posY + bLength; i++)
-		{
-			for (size_t j = posX; j < posX + bWidth; j++)
+		switch (temp) {
+		case 'W':
+			for (size_t i = posY; i < posY + bLength; i++)
 			{
-				buildingAreaArr[i][j] = bType;
+				for (size_t j = posX; j < posX + bWidth; j++)
+				{
+					buildingAreaArr[i][j] = new Wasserkraft();
+				}
 			}
+			cout << "Building created!" << endl;
+			break;
+		case 'X':
+			for (size_t i = posY; i < posY + bLength; i++)
+			{
+				for (size_t j = posX; j < posX + bWidth; j++)
+				{
+					buildingAreaArr[i][j] = new Windkraft();
+				}
+			}
+			cout << "Building created!" << endl;
 		}
-		cout << "Building created!" << endl;
+		case 'S':
+			for (size_t i = posY; i < posY + bLength; i++)
+			{
+				for (size_t j = posX; j < posX + bWidth; j++)
+				{
+					buildingAreaArr[i][j] = new Solar();
+				}
+			}
+			cout << "Building created!" << endl;
 	}
 	else {
 		cout << "Error: Building doesn't fit in Plan!" << endl;
