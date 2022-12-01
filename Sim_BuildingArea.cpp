@@ -103,7 +103,7 @@ void Sim_BuildingArea::deleteArea()
 	cout << "Please insert Size (width):" << endl;
 	cin >> bWidth;
 	
-	if (posX > 0 || posY > 0 || bWidth > 0 || bLength > 0) {
+	if (posX > 0 && posY > 0 && posX < areaWidth && posY < areaLength &&  bWidth > 0 && posX + bWidth < areaWidth && bLength > 0 && posY + bLength < areaLength) {
 		for (size_t i = posY; i < posY + bLength; i++)
 		{
 			for (size_t j = posY; j < posX + bWidth; j++)
