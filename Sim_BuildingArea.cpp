@@ -135,7 +135,8 @@ void Sim_BuildingArea::deleteArea()
 		{
 			for (size_t j = posY; j < posX + bWidth; j++)
 			{
-				buildingAreaArr[i][j] = BuildingType(0);
+				delete buildingAreaArr[i][j];
+				buildingAreaArr[i][j] = new Leerstehend();
 			}
 		}
 		cout << "Area deleted!" << endl;
