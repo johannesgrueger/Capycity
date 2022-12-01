@@ -42,8 +42,15 @@ void Sim_BuildingArea::newBuilding()
 	cout << "Please insert Building Length: " << endl;
 	cin >> bLength;
 
-	cout << "Please insert Building Type (W='Wasserkraft', X='Windkraft', S='Solar'):" << endl;
-	cin >> temp;
+	retry = true;
+	do {
+		cout << "Please insert Building Type (W='Wasserkraft', X='Windkraft', S='Solar'):" << endl;
+		cin >> temp;
+		if (temp == 'W' || temp == 'X' || temp == 'S')
+			cout << "invalid Input! retry" << endl;
+		else
+			retry = false;
+	} while (retry);
 
 	if (testBuilding()) {
 		switch (temp) {
@@ -86,10 +93,6 @@ void Sim_BuildingArea::newBuilding()
 bool Sim_BuildingArea::testBuilding()
 {
 	fitting = true;
-	if (bType < 1 || bType > 3) {
-		cout << "invalid Input!" << endl;
-		fitting = false;
-	}
 	if (posX < 0 || posY < 0 || bWidth < 0 || bLength < 0) {
 		fitting = false;
 	}

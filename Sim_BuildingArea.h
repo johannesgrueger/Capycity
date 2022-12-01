@@ -24,5 +24,6 @@ namespace Sim_Capycity {
 		int bWidth, bLength;
 		int posX, posY;
 		bool fitting;
+		bool retry;
 	};
 }
