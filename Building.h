@@ -2,11 +2,12 @@
 #include "Material.h"
 namespace Build {
 	class Building {
+	public:
 		Building();
 		~Building();
 		float grundpreis;
 		char label;
-		Material[]* bestandteile;
+		Material** bestandteile;
 	};
 
 	class Leerstehend : public Building {

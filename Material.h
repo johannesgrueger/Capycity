@@ -2,27 +2,33 @@
 namespace Mat {
 	class Material {
 	public:
-		Material(float _preis);
+		Material();
 		~Material();
-		getPreis();
-		int preis;
+		float getPreis();
+		float preis;
 	};
 
 	class Holz : public Material
 	{
-		Holz(float _preis);
+	public:
+		Holz();
 		~Holz();
+		float getPreis();
 	};
 
 	class Metall : public Material
 	{
-		Metall(float _preis);
+	public:
+		Metall();
 		~Metall();
+		float getPreis();
 	};
 
 	class Kunststoff : public Material
 	{
-		Kunststoff(float _preis);
+	public:
+		Kunststoff();
 		~Kunststoff();
+		float getPreis();
 	};
 }

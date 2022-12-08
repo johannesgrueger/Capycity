@@ -20,7 +20,6 @@ namespace Sim_Capycity {
 		Building** buildingAreaArr;
 		int areaWidth, areaLength;
 		char temp;
-		Building bLabel;
 		int bWidth, bLength;
 		int posX, posY;
 		bool fitting;

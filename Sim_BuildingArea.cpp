@@ -1,5 +1,5 @@
 #include "Sim_BuildingArea.h"
-#include "Buildings.h"
+#include "Building.h"
 #include <iostream>
 
 using namespace Sim_Capycity;
