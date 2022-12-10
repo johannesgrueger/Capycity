@@ -10,10 +10,10 @@ Sim_BuildingArea::Sim_BuildingArea(int length, int width)
 {
 	areaLength = length;
 	areaWidth = width;
-	buildingAreaArr = new Building*[areaLength];
+	buildingAreaArr = new Building**[areaLength];
 	for (size_t i = 0; i < areaLength; i++)
 	{
-		buildingAreaArr[i] = new Building[areaWidth];
+		buildingAreaArr[i] = new Building*[areaWidth];
 	}
 	for (size_t i = 0; i < areaLength; i++)
 	{
@@ -44,9 +44,9 @@ void Sim_BuildingArea::newBuilding()
 
 	retry = true;
 	do {
-		cout << "Please insert Building Type (W='Wasserkraft', X='Windkraft', S='Solar'):" << endl;
+		cout << "Please insert Building Type (1='Wasserkraft', 2='Windkraft', 3='Solar'):" << endl;
 		cin >> temp;
-		if (temp == 'W' || temp == 'X' || temp == 'S')
+		if (temp != 1 && temp != 2 && temp != 3)
 			cout << "invalid Input! retry" << endl;
 		else
 			retry = false;
@@ -54,7 +54,7 @@ void Sim_BuildingArea::newBuilding()
 
 	if (testBuilding()) {
 		switch (temp) {
-		case 'W':
+		case 1:
 			for (size_t i = posY; i < posY + bLength; i++)
 			{
 				for (size_t j = posX; j < posX + bWidth; j++)
@@ -64,7 +64,7 @@ void Sim_BuildingArea::newBuilding()
 			}
 			cout << "Building created!" << endl;
 			break;
-		case 'X':
+		case 2:
 			for (size_t i = posY; i < posY + bLength; i++)
 			{
 				for (size_t j = posX; j < posX + bWidth; j++)
@@ -73,8 +73,8 @@ void Sim_BuildingArea::newBuilding()
 				}
 			}
 			cout << "Building created!" << endl;
-		}
-		case 'S':
+			break;
+		case 3:
 			for (size_t i = posY; i < posY + bLength; i++)
 			{
 				for (size_t j = posX; j < posX + bWidth; j++)
@@ -83,6 +83,8 @@ void Sim_BuildingArea::newBuilding()
 				}
 			}
 			cout << "Building created!" << endl;
+			break;
+		}
 	}
 	else {
 		cout << "Error: Building doesn't fit in Plan!" << endl;
@@ -107,7 +109,7 @@ bool Sim_BuildingArea::testBuilding()
 		{
 			for (size_t j = posX; j < posX + bWidth; j++)
 			{
-				if (buildingAreaArr[i][j] != BuildingType(0))
+				if (buildingAreaArr[i][j]->label != 'O')
 					fitting = false;
 				if (!fitting)
 					break;
@@ -130,7 +132,7 @@ void Sim_BuildingArea::deleteArea()
 	cout << "Please insert Size (width):" << endl;
 	cin >> bWidth;
 	
-	if (posX > 0 && posY > 0 && posX < areaWidth && posY < areaLength &&  bWidth > 0 && posX + bWidth < areaWidth && bLength > 0 && posY + bLength < areaLength) {
+	if (posX >= 0 && posY >= 0 && posX < areaWidth && posY < areaLength &&  bWidth > 0 && posX + bWidth < areaWidth && bLength > 0 && posY + bLength < areaLength) {
 		for (size_t i = posY; i < posY + bLength; i++)
 		{
 			for (size_t j = posY; j < posX + bWidth; j++)
@@ -152,7 +154,7 @@ void Sim_BuildingArea::printBuildingPlan()
 	{
 		for (size_t j = 0; j < areaWidth; j++) 
 		{
-			cout << buildingAreaArr[i][j] << " ";
+			cout << buildingAreaArr[i][j]->label << " ";
 		}
 		cout << endl;
 	}

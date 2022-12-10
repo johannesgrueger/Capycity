@@ -23,7 +23,10 @@ using namespace Mat;
 	Windkraft::Windkraft() {
 		grundpreis = 20;
 		label = 'X';
-		bestandteile = {Holz(), Holz(), Metall()};
+		bestandteile = new Material*[3];
+		bestandteile[0] = new Holz();
+		bestandteile[1] = new Holz();
+		bestandteile[2] = new Metall();
 	}
 	Windkraft::~Windkraft() {
 	}
@@ -32,7 +35,11 @@ using namespace Mat;
 	Wasserkraft::Wasserkraft() {
 		grundpreis = 50;
 		label = 'W';
-		bestandteile = {Holz(), Metall(), Metall(), Kunststoff()};
+		bestandteile = new Material*[4];
+		bestandteile[0] = new Holz();
+		bestandteile[1] = new Metall();
+		bestandteile[2] = new Metall();
+		bestandteile[3] = new Kunststoff();
 	}
 	Wasserkraft::~Wasserkraft() {
 	}
@@ -41,7 +48,10 @@ using namespace Mat;
 	Solar::Solar() {
 		grundpreis = 5;
 		label = 'S';
-		bestandteile = {Metall(), Kunststoff(), Kunststoff()};
+		bestandteile = new Material * [3];
+		bestandteile[0] = new Metall();
+		bestandteile[1] = new Metall();
+		bestandteile[2] = new Kunststoff();
 	}
 	Solar::~Solar() {
 	}
