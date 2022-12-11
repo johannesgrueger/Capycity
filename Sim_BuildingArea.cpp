@@ -1,6 +1,7 @@
 #include "Sim_BuildingArea.h"
 #include "Building.h"
 #include <iostream>
+#include <string>
 
 using namespace Sim_Capycity;
 using namespace std;
@@ -33,6 +34,7 @@ Sim_BuildingArea::~Sim_BuildingArea()
 
 void Sim_BuildingArea::newBuilding()
 {
+	cout << "-------" << endl << "New Building:" << endl;
 	cout << "Please insert Position (posY): " << endl;
 	cin >> posY;
 	cout << "Please insert Position (posX): " << endl;
@@ -47,7 +49,7 @@ void Sim_BuildingArea::newBuilding()
 		cout << "Please insert Building Type (1='Wasserkraft', 2='Windkraft', 3='Solar'):" << endl;
 		cin >> temp;
 		if (temp != 1 && temp != 2 && temp != 3)
-			cout << "invalid Input! retry" << endl;
+			cout << ">> invalid Input! retry" << endl;
 		else
 			retry = false;
 	} while (retry);
@@ -62,7 +64,6 @@ void Sim_BuildingArea::newBuilding()
 					buildingAreaArr[i][j] = new Wasserkraft();
 				}
 			}
-			cout << "Building created!" << endl;
 			break;
 		case 2:
 			for (size_t i = posY; i < posY + bLength; i++)
@@ -72,7 +73,6 @@ void Sim_BuildingArea::newBuilding()
 					buildingAreaArr[i][j] = new Windkraft();
 				}
 			}
-			cout << "Building created!" << endl;
 			break;
 		case 3:
 			for (size_t i = posY; i < posY + bLength; i++)
@@ -82,13 +82,14 @@ void Sim_BuildingArea::newBuilding()
 					buildingAreaArr[i][j] = new Solar();
 				}
 			}
-			cout << "Building created!" << endl;
 			break;
 		}
+		cout << ">> Building created!" << endl;
 	}
 	else {
-		cout << "Error: Building doesn't fit in Plan!" << endl;
+		cout << ">> Error: Building doesn't fit in Plan!" << endl;
 	}
+	cout << "-------" << endl << endl;
 }
 
 
@@ -123,6 +124,7 @@ bool Sim_BuildingArea::testBuilding()
 
 void Sim_BuildingArea::deleteArea()
 {
+	cout << "-------" << endl << "Delete area:" << endl;
 	cout << "Please insert Position (posY):" << endl;
 	cin >> posY;
 	cout << "Please insert Position (posX):" << endl;
@@ -141,21 +143,77 @@ void Sim_BuildingArea::deleteArea()
 				buildingAreaArr[i][j] = new Leerstehend();
 			}
 		}
-		cout << "Area deleted!" << endl;
+		cout << ">> Area deleted!" << endl;
 	}
 	else {
-		cout << "invalid Input" << endl;
+		cout << ">> invalid Input" << endl;
 	}
+	cout << "-------" << endl << endl;
 }
 
 void Sim_BuildingArea::printBuildingPlan()
 {
+	cout << "-------" << endl << "current Plan:" << endl;
 	for (size_t i = 0; i < areaLength; i++)
 	{
-		for (size_t j = 0; j < areaWidth; j++) 
+		for (size_t j = 0; j < areaWidth; j++)
 		{
 			cout << buildingAreaArr[i][j]->label << " ";
 		}
 		cout << endl;
+
 	}
+	cout << "-------" << endl << "Lineup:" << endl;
+	int w_count = 0;
+	int o_count = 0;
+	int x_count = 0;
+	int s_count = 0;
+	// count all Buildings
+	for (size_t i = 0; i < areaLength; i++)
+	{
+		for (size_t j = 0; j < areaWidth; j++)
+		{
+			if (buildingAreaArr[i][j]->label == 'W')
+				w_count++;
+			if (buildingAreaArr[i][j]->label == 'O')
+				o_count++;
+			if (buildingAreaArr[i][j]->label == 'X')
+				x_count++;
+			if (buildingAreaArr[i][j]->label == 'S')
+				s_count++;
+		}
+	}
+
+	Material* x;
+
+	cout << "Number of Hydropower (" << Wasserkraft().label << "): " << w_count << ", Cost per Unit: " << Wasserkraft().grundpreis << "€, Cost in total: " << w_count * Wasserkraft().grundpreis << "€" << endl;
+	cout << "       -> Materialien: ";
+	for (size_t i = 0; i < 4; i++) // wie krieg ich die size dynamisch hin?
+	{
+		x = Wasserkraft().bestandteile[i];
+		cout << w_count << " * " << x->mat_name << "; ";
+	}
+	cout << endl << endl;
+
+	cout << "Number of Windmills (" << Windkraft().label << "): " << x_count << ", Cost per Unit: " << Windkraft().grundpreis << "€, Cost in total: " << x_count * Windkraft().grundpreis << "€" << endl;
+	cout << "       -> Materialien: ";
+	for (size_t i = 0; i < 3; i++) // wie krieg ich die size dynamisch hin?
+	{
+		x = Windkraft().bestandteile[i];
+		cout << x_count << " * " << x->mat_name << "; ";
+	}
+	cout << endl << endl;
+
+	cout << "Number of Photovoltaic (" << Solar().label << "): " << s_count << ", Cost per Unit: " << Solar().grundpreis << "€, Cost in total: " << s_count * Solar().grundpreis << "€" << endl;
+	cout << "       -> Materialien: ";
+	for (size_t i = 0; i < 3; i++) // wie krieg ich die size dynamisch hin?
+	{
+		x = Solar().bestandteile[i];
+		cout << s_count << " * " << x->mat_name << "; ";
+	}
+	cout << endl << endl;
+
+	cout << "unused Space: (" << Leerstehend().label << "): " << o_count << endl;
+
+	cout << "-------" << endl << endl;
 }
