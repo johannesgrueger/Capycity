@@ -1,4 +1,7 @@
 #pragma once
+#include <string>
+using namespace std;
+
 namespace Mat {
 	class Material {
 	public:
@@ -6,6 +9,7 @@ namespace Mat {
 		~Material();
 		float getPreis();
 		float preis;
+		string mat_name;
 	};
 
 	class Holz : public Material
