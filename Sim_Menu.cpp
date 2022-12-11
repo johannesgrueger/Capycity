@@ -15,6 +15,8 @@ bool Sim_Menu::printMenu(Sim_BuildingArea& area)
 {
 	cout << "*********" << endl << "1: set new Building" << endl << "2: delete Area" << endl << "3: print BuildingArea" << endl << "4: end Program" << endl << "*********" << endl;
 	cin >> input;
+	cout << endl;
+
 	switch (input) {
 	case 1: area.newBuilding(); break;
 	case 2: area.deleteArea(); break;
