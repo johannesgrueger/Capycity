@@ -29,6 +29,7 @@ using namespace Mat;
 		bestandteile[2] = new Metall();
 	}
 	Windkraft::~Windkraft() {
+		delete[] bestandteile;
 	}
 
 //class Wasserkraft
@@ -42,6 +43,7 @@ using namespace Mat;
 		bestandteile[3] = new Kunststoff();
 	}
 	Wasserkraft::~Wasserkraft() {
+		delete[] bestandteile;
 	}
 
 // class Solar
@@ -54,4 +56,5 @@ using namespace Mat;
 		bestandteile[2] = new Kunststoff();
 	}
 	Solar::~Solar() {
+		delete[] bestandteile;
 	}
