@@ -21,10 +21,6 @@ using namespace Mat;
 	Holz::~Holz() {
 	}
 
-	float Holz::getPreis() {
-		return preis;
-	}
-
 // class Metall
 	Metall::Metall() {
 		preis = 12.80f;
@@ -34,10 +30,6 @@ using namespace Mat;
 	Metall::~Metall() {
 	}
 
-	float Metall::getPreis() {
-		return preis;
-	}
-
 //class Kunststoff
 	Kunststoff::Kunststoff() {
 		preis = 2.30f;
@@ -45,8 +37,4 @@ using namespace Mat;
 	}
 
 	Kunststoff::~Kunststoff() {
-	}
-
-	float Kunststoff::getPreis() {
-		return preis;
 	}
