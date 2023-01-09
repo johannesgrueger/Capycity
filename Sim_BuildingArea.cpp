@@ -1,11 +1,15 @@
 #include "Sim_BuildingArea.h"
 #include "Building.h"
+#include "Material.h"
+#include "MatCompare.cpp"
 #include <iostream>
 #include <string>
+#include <map>
 
 using namespace Sim_Capycity;
 using namespace std;
 using namespace Build;
+using namespace Mat;
 
 Sim_BuildingArea::Sim_BuildingArea(int length, int width)
 {
@@ -184,32 +188,28 @@ void Sim_BuildingArea::printBuildingPlan()
 		}
 	}
 
-	Material* x;
-
 	cout << "Number of Hydropower (" << Wasserkraft().label << "): " << w_count << ", Cost per Unit: " << Wasserkraft().grundpreis << "€, Cost in total: " << w_count * Wasserkraft().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 4; i++)
+
+	for (map<Material, int, MatCompare>::iterator i = Wasserkraft().bestandteile.begin(); i != Wasserkraft().bestandteile.end(); ++i)
 	{
-		x = Wasserkraft().bestandteile[i];
-		cout << w_count << " * " << x->mat_name << "; ";
+		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 
 	cout << "Number of Windmills (" << Windkraft().label << "): " << x_count << ", Cost per Unit: " << Windkraft().grundpreis << "€, Cost in total: " << x_count * Windkraft().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 3; i++) 
+	for (map<Material, int, MatCompare>::iterator i = Windkraft().bestandteile.begin(); i != Windkraft().bestandteile.end(); ++i)
 	{
-		x = Windkraft().bestandteile[i];
-		cout << x_count << " * " << x->mat_name << "; ";
+		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 
 	cout << "Number of Photovoltaic (" << Solar().label << "): " << s_count << ", Cost per Unit: " << Solar().grundpreis << "€, Cost in total: " << s_count * Solar().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 3; i++)
+	for (map<Material, int, MatCompare>::iterator i = Solar().bestandteile.begin(); i != Solar().bestandteile.end(); ++i)
 	{
-		x = Solar().bestandteile[i];
-		cout << s_count << " * " << x->mat_name << "; ";
+		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 

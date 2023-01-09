@@ -26,45 +26,43 @@ using namespace std;
 	Windkraft::Windkraft() {
 		label = 'X';
 		grundpreis = 0;
-		map<Material, int, MatCompare> bestandteile;
 		bestandteile[Holz()] = 2;
 		bestandteile[Metall()] = 1;
-		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
 		{
 			grundpreis += i->first.preis * i->second;
 		}
 	}
 	Windkraft::~Windkraft() {
-		delete[] bestandteile;
+		//todo
 	}
+
 
 //class Wasserkraft
 	Wasserkraft::Wasserkraft() {
 		label = 'W';
-		map<Material, int, MatCompare> bestandteile;
 		bestandteile[Holz()] = 1;
 		bestandteile[Metall()] = 2;
 		bestandteile[Metall()] = 1;
-		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
 		{
 			grundpreis += i->first.preis * i->second;
 		}
 	}
 	Wasserkraft::~Wasserkraft() {
-		delete[] bestandteile;
+		//todo
 	}
 
 // class Solar
 	Solar::Solar() {
 		label = 'S';
-		map<Material, int, MatCompare> bestandteile;
 		bestandteile[Metall()] = 2;
 		bestandteile[Metall()] = 1;
-		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
 		{
 			grundpreis += i->first.preis * i->second;
 		}
 	}
 	Solar::~Solar() {
-		delete[] bestandteile;
+		// todo
 	}

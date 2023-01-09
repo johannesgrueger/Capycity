@@ -1,5 +1,7 @@
 #pragma once
 #include "Material.h"
+#include "MatCompare.cpp"
+#include <map>
 using namespace Mat;
 
 namespace Build {
@@ -7,7 +9,7 @@ namespace Build {
 	public:
 		Building();
 		~Building();
-		Material** bestandteile;
+		map<Material, int, MatCompare> bestandteile;
 		float grundpreis;
 		char label;
 	};
