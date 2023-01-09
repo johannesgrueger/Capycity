@@ -188,7 +188,7 @@ void Sim_BuildingArea::printBuildingPlan()
 
 	cout << "Number of Hydropower (" << Wasserkraft().label << "): " << w_count << ", Cost per Unit: " << Wasserkraft().grundpreis << "€, Cost in total: " << w_count * Wasserkraft().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 4; i++) // wie krieg ich die size dynamisch hin?
+	for (size_t i = 0; i < 4; i++)
 	{
 		x = Wasserkraft().bestandteile[i];
 		cout << w_count << " * " << x->mat_name << "; ";
@@ -197,7 +197,7 @@ void Sim_BuildingArea::printBuildingPlan()
 
 	cout << "Number of Windmills (" << Windkraft().label << "): " << x_count << ", Cost per Unit: " << Windkraft().grundpreis << "€, Cost in total: " << x_count * Windkraft().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 3; i++) // wie krieg ich die size dynamisch hin?
+	for (size_t i = 0; i < 3; i++) 
 	{
 		x = Windkraft().bestandteile[i];
 		cout << x_count << " * " << x->mat_name << "; ";
@@ -206,7 +206,7 @@ void Sim_BuildingArea::printBuildingPlan()
 
 	cout << "Number of Photovoltaic (" << Solar().label << "): " << s_count << ", Cost per Unit: " << Solar().grundpreis << "€, Cost in total: " << s_count * Solar().grundpreis << "€" << endl;
 	cout << "       -> Materialien: ";
-	for (size_t i = 0; i < 3; i++) // wie krieg ich die size dynamisch hin?
+	for (size_t i = 0; i < 3; i++)
 	{
 		x = Solar().bestandteile[i];
 		cout << s_count << " * " << x->mat_name << "; ";

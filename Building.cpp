@@ -1,8 +1,11 @@
 #include "Material.h"
 #include "Building.h"
+#include "MatCompare.cpp"
 #include <iostream>
+#include <map>
 using namespace Build;
 using namespace Mat;
+using namespace std;
 
 // class Building
 	Building::Building() {
@@ -22,11 +25,14 @@ using namespace Mat;
 // class Windkraft
 	Windkraft::Windkraft() {
 		label = 'X';
-		bestandteile = new Material*[3];
-		bestandteile[0] = new Holz();
-		bestandteile[1] = new Holz();
-		bestandteile[2] = new Metall();
-		grundpreis = bestandteile[0]->preis + bestandteile[1]->preis + bestandteile[2]->preis;
+		grundpreis = 0;
+		map<Material, int, MatCompare> bestandteile;
+		bestandteile[Holz()] = 2;
+		bestandteile[Metall()] = 1;
+		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		{
+			grundpreis += i->first.preis * i->second;
+		}
 	}
 	Windkraft::~Windkraft() {
 		delete[] bestandteile;
@@ -35,12 +41,14 @@ using namespace Mat;
 //class Wasserkraft
 	Wasserkraft::Wasserkraft() {
 		label = 'W';
-		bestandteile = new Material*[4];
-		bestandteile[0] = new Holz();
-		bestandteile[1] = new Metall();
-		bestandteile[2] = new Metall();
-		bestandteile[3] = new Kunststoff();
-		grundpreis = bestandteile[0]->preis + bestandteile[1]->preis + bestandteile[2]->preis + bestandteile[3]->preis;
+		map<Material, int, MatCompare> bestandteile;
+		bestandteile[Holz()] = 1;
+		bestandteile[Metall()] = 2;
+		bestandteile[Metall()] = 1;
+		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		{
+			grundpreis += i->first.preis * i->second;
+		}
 	}
 	Wasserkraft::~Wasserkraft() {
 		delete[] bestandteile;
@@ -49,11 +57,13 @@ using namespace Mat;
 // class Solar
 	Solar::Solar() {
 		label = 'S';
-		bestandteile = new Material * [3];
-		bestandteile[0] = new Metall();
-		bestandteile[1] = new Metall();
-		bestandteile[2] = new Kunststoff();
-		grundpreis = bestandteile[0]->preis + bestandteile[1]->preis + bestandteile[2]->preis;
+		map<Material, int, MatCompare> bestandteile;
+		bestandteile[Metall()] = 2;
+		bestandteile[Metall()] = 1;
+		for (map<Material, int>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		{
+			grundpreis += i->first.preis * i->second;
+		}
 	}
 	Solar::~Solar() {
 		delete[] bestandteile;

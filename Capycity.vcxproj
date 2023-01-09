@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Building.cpp" />
+    <ClCompile Include="MatCompare.cpp" />
     <ClCompile Include="Material.cpp" />
     <ClCompile Include="Sim_BuildingArea.cpp" />
     <ClCompile Include="Sim_Main.cpp" />
