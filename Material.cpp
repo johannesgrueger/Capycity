@@ -7,9 +7,14 @@ using namespace Mat;
 
 // class Material
 	Material::Material() {
+		preis = 0.0f;
+		mat_name = "Material";
 	}
 
 	Material::~Material() {
+	}
+	float Material::getPreis() {
+		return preis;
 	}
 
 // class Holz

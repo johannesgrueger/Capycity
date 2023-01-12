@@ -26,5 +26,8 @@ namespace Sim_Capycity {
 		int posX, posY;
 		bool fitting;
 		bool retry;
+		Wasserkraft tempW;
+		Windkraft tempX;
+		Solar tempS;
 	};
 }

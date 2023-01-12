@@ -12,6 +12,7 @@ namespace Build {
 		map<Material, int, MatCompare> bestandteile;
 		float grundpreis;
 		char label;
+		float getPreis();
 	};
 
 	class Leerstehend : public Building {

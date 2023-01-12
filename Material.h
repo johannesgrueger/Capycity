@@ -17,7 +17,6 @@ namespace Mat {
 	public:
 		Holz();
 		~Holz();
-		float getPreis();
 	};
 
 	class Metall : public Material
@@ -25,7 +24,6 @@ namespace Mat {
 	public:
 		Metall();
 		~Metall();
-		float getPreis();
 	};
 
 	class Kunststoff : public Material
@@ -33,6 +31,5 @@ namespace Mat {
 	public:
 		Kunststoff();
 		~Kunststoff();
-		float getPreis();
 	};
 }

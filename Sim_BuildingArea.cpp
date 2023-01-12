@@ -27,6 +27,9 @@ Sim_BuildingArea::Sim_BuildingArea(int length, int width)
 			buildingAreaArr[i][j] = new Leerstehend();
 		}
 	}
+	tempW = Wasserkraft();
+	tempX = Windkraft();
+	tempS = Solar();
 }
 
 Sim_BuildingArea::~Sim_BuildingArea()
@@ -187,29 +190,27 @@ void Sim_BuildingArea::printBuildingPlan()
 				s_count++;
 		}
 	}
-
-	cout << "Number of Hydropower (" << Wasserkraft().label << "): " << w_count << ", Cost per Unit: " << Wasserkraft().grundpreis << "€, Cost in total: " << w_count * Wasserkraft().grundpreis << "€" << endl;
-	cout << "       -> Materialien: ";
-
-	for (map<Material, int, MatCompare>::iterator i = Wasserkraft().bestandteile.begin(); i != Wasserkraft().bestandteile.end(); ++i)
+	cout << "Number of Hydropower (" << tempW.label << "):	" << w_count << ", Cost per Unit: " << tempW.getPreis() << "€, Cost in total: " << w_count * tempW.getPreis() << "€" << endl;
+	cout << "					-> Materialien: ";
+	for (map<Material, int, MatCompare>::iterator i = tempW.bestandteile.begin(); i != tempW.bestandteile.end(); ++i)
 	{
 		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 
-	cout << "Number of Windmills (" << Windkraft().label << "): " << x_count << ", Cost per Unit: " << Windkraft().grundpreis << "€, Cost in total: " << x_count * Windkraft().grundpreis << "€" << endl;
-	cout << "       -> Materialien: ";
-	for (map<Material, int, MatCompare>::iterator i = Windkraft().bestandteile.begin(); i != Windkraft().bestandteile.end(); ++i)
+	cout << "Number of Windmills (" << tempX.label << "):	" << x_count << ", Cost per Unit: " << tempX.getPreis() << "€, Cost in total: " << x_count * tempX.getPreis() << "€" << endl;
+	cout << "					-> Materialien: ";
+	for (map<Material, int, MatCompare>::iterator i = tempX.bestandteile.begin(); i != tempX.bestandteile.end(); ++i)
 	{
-		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
+		cout << x_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 
-	cout << "Number of Photovoltaic (" << Solar().label << "): " << s_count << ", Cost per Unit: " << Solar().grundpreis << "€, Cost in total: " << s_count * Solar().grundpreis << "€" << endl;
-	cout << "       -> Materialien: ";
-	for (map<Material, int, MatCompare>::iterator i = Solar().bestandteile.begin(); i != Solar().bestandteile.end(); ++i)
+	cout << "Number of Photovoltaic (" << tempS.label << "):	" << s_count << ", Cost per Unit: " << tempS.getPreis() << "€, Cost in total: " << s_count * tempS.getPreis() << "€" << endl;
+	cout << "					-> Materialien: ";
+	for (map<Material, int, MatCompare>::iterator i = tempS.bestandteile.begin(); i != tempS.bestandteile.end(); ++i)
 	{
-		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
+		cout << s_count * i->second << " * " << i->first.mat_name << "; ";
 	}
 	cout << endl << endl;
 
