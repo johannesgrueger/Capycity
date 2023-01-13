@@ -4,11 +4,11 @@ using namespace Build;
 
 namespace Sim_Capycity {
 	//enum BuildingType { empty, Wasserkraft, Windkraft, Solar };
-	class Sim_BuildingArea
+	class Blueprint
 	{
 	public:
-		Sim_BuildingArea(int length, int width);
-		~Sim_BuildingArea();
+		Blueprint(int length, int width);
+		~Blueprint();
 
 		void newBuilding();
 
@@ -17,6 +17,12 @@ namespace Sim_Capycity {
 		void deleteArea();
 
 		void printBuildingPlan();
+
+		void countAllBuildings();
+
+		float calculateEfficiency();
+
+		bool isEqualTo(Blueprint b);
 
 	private:
 		Building*** buildingAreaArr;
@@ -29,5 +35,9 @@ namespace Sim_Capycity {
 		Wasserkraft tempW;
 		Windkraft tempX;
 		Solar tempS;
+		int w_count = 0;
+		int o_count = 0;
+		int x_count = 0;
+		int s_count = 0;
 	};
 }

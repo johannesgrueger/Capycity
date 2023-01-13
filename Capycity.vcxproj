@@ -130,14 +130,14 @@
     <ClCompile Include="Building.cpp" />
     <ClCompile Include="MatCompare.cpp" />
     <ClCompile Include="Material.cpp" />
-    <ClCompile Include="Sim_BuildingArea.cpp" />
+    <ClCompile Include="Blueprint.cpp" />
     <ClCompile Include="Sim_Main.cpp" />
     <ClCompile Include="Sim_Menu.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Building.h" />
     <ClInclude Include="Material.h" />
-    <ClInclude Include="Sim_BuildingArea.h" />
+    <ClInclude Include="Blueprint.h" />
     <ClInclude Include="Sim_Menu.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

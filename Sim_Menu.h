@@ -1,5 +1,5 @@
 #pragma once
-#include "Sim_BuildingArea.h"
+#include "Blueprint.h"
 namespace Sim_Capycity {
 	class Sim_Menu
 	{
@@ -7,7 +7,7 @@ namespace Sim_Capycity {
 		Sim_Menu();
 		~Sim_Menu();
 
-		bool printMenu(Sim_BuildingArea& area);
+		bool printMenu(Blueprint& area);
 
 	private:
 		int input;

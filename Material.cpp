@@ -20,7 +20,7 @@ using namespace Mat;
 // class Holz
 	Holz::Holz() {
 		preis = 5.50f;
-		mat_name = "Holz";
+		mat_name = "Wood";
 	}
 
 	Holz::~Holz() {
@@ -29,7 +29,7 @@ using namespace Mat;
 // class Metall
 	Metall::Metall() {
 		preis = 12.80f;
-		mat_name = "Metall";
+		mat_name = "Metal";
 	}
 
 	Metall::~Metall() {
@@ -38,7 +38,7 @@ using namespace Mat;
 //class Kunststoff
 	Kunststoff::Kunststoff() {
 		preis = 2.30f;
-		mat_name = "Kunststoff";
+		mat_name = "Plastic";
 	}
 
 	Kunststoff::~Kunststoff() {

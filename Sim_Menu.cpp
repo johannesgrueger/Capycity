@@ -11,7 +11,7 @@ Sim_Menu::~Sim_Menu()
 {
 }
 
-bool Sim_Menu::printMenu(Sim_BuildingArea& area)
+bool Sim_Menu::printMenu(Blueprint& area)
 {
 	cout << "*********" << endl << "1: set new Building" << endl << "2: delete Area" << endl << "3: print BuildingArea" << endl << "4: end Program" << endl << "*********" << endl;
 	cin >> input;

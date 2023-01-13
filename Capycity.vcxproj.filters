@@ -18,7 +18,7 @@
     <ClCompile Include="Sim_Main.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
-    <ClCompile Include="Sim_BuildingArea.cpp">
+    <ClCompile Include="Blueprint.cpp">
       <Filter>Quelldateien</Filter>
     </ClCompile>
     <ClCompile Include="Sim_Menu.cpp">
@@ -35,7 +35,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sim_BuildingArea.h">
+    <ClInclude Include="Blueprint.h">
       <Filter>Headerdateien</Filter>
     </ClInclude>
     <ClInclude Include="Sim_Menu.h">
