@@ -196,6 +196,8 @@ void Sim_BuildingArea::printBuildingPlan()
 	{
 		cout << w_count * i->second << " * " << i->first.mat_name << "; ";
 	}
+	cout << endl << "					-> Leistung einzeln: " << tempW.getPower();
+	cout << endl << "					-> Leistung gesamt:  " << tempW.getPower() * w_count;
 	cout << endl << endl;
 
 	cout << "Number of Windmills (" << tempX.label << "):	" << x_count << ", Cost per Unit: " << tempX.getPreis() << "€, Cost in total: " << x_count * tempX.getPreis() << "€" << endl;
@@ -204,6 +206,8 @@ void Sim_BuildingArea::printBuildingPlan()
 	{
 		cout << x_count * i->second << " * " << i->first.mat_name << "; ";
 	}
+	cout << endl << "					-> Leistung einzeln: " << tempX.getPower();
+	cout << endl << "					-> Leistung gesamt:  " << tempX.getPower() * x_count;
 	cout << endl << endl;
 
 	cout << "Number of Photovoltaic (" << tempS.label << "):	" << s_count << ", Cost per Unit: " << tempS.getPreis() << "€, Cost in total: " << s_count * tempS.getPreis() << "€" << endl;
@@ -212,6 +216,8 @@ void Sim_BuildingArea::printBuildingPlan()
 	{
 		cout << s_count * i->second << " * " << i->first.mat_name << "; ";
 	}
+	cout << endl << "					-> Leistung einzeln: " << tempS.getPower();
+	cout << endl << "					-> Leistung gesamt:  " << tempS.getPower() * s_count;
 	cout << endl << endl;
 
 	cout << "unused Space: (" << Leerstehend().label << "): " << o_count << endl;

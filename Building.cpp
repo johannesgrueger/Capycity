@@ -18,21 +18,34 @@ using namespace std;
 
 // class Building
 	Building::Building() {
-		grundpreis = 0;
+		power = 0;
 		label = '_';
 		bestandteile = {};
+		grundpreis = calculatePreis();
 	}
 	Building::~Building() {
 	}
 	float Building::getPreis() {
 		return grundpreis;
 	}
+	float Building::calculatePreis() {
+		float preis = 0;
+		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
+		{
+			preis += i->first.preis * i->second;
+		}
+		return preis;
+	}
+	int Building::getPower() {
+		return power;
+	}
 
 // class Leerstehend
 	Leerstehend::Leerstehend() {
-		grundpreis = 0;
+		power = 0;
 		label = 'O';
 		bestandteile = {};
+		grundpreis = calculatePreis();
 	}
 	Leerstehend::~Leerstehend() {
 	}
@@ -41,13 +54,10 @@ using namespace std;
 // class Windkraft
 	Windkraft::Windkraft() {
 		label = 'X';
-		grundpreis = 0;
+		power = 5;
 		bestandteile[Holz()] = 2;
 		bestandteile[Metall()] = 1;
-		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
-		{
-			grundpreis += i->first.preis * i->second;
-		}
+		grundpreis = calculatePreis();
 	}
 	Windkraft::~Windkraft() {
 		//todo
@@ -56,14 +66,12 @@ using namespace std;
 
 //class Wasserkraft
 	Wasserkraft::Wasserkraft() {
+		power = 8;
 		label = 'W';
 		bestandteile[Holz()] = 1;
 		bestandteile[Metall()] = 2;
 		bestandteile[Kunststoff()] = 1;
-		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
-		{
-			grundpreis += i->first.preis * i->second;
-		}
+		grundpreis = calculatePreis();
 	}
 	Wasserkraft::~Wasserkraft() {
 		//todo
@@ -72,13 +80,10 @@ using namespace std;
 // class Solar
 	Solar::Solar() {
 		label = 'S';
+		power = 3;
 		bestandteile[Metall()] = 2;
 		bestandteile[Kunststoff()] = 1;
-		float f;
-		for (map<Material, int, MatCompare>::iterator i = bestandteile.begin(); i != bestandteile.end(); ++i)
-		{
-			grundpreis += i->first.preis * i->second;
-		}
+		grundpreis = calculatePreis();
 	}
 	Solar::~Solar() {
 		// todo

@@ -11,8 +11,11 @@ namespace Build {
 		~Building();
 		map<Material, int, MatCompare> bestandteile;
 		float grundpreis;
+		int power;
 		char label;
 		float getPreis();
+		float calculatePreis();
+		int getPower();
 	};
 
 	class Leerstehend : public Building {
