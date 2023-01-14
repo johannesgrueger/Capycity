@@ -11,8 +11,12 @@ using namespace std;
 using namespace Build;
 using namespace Mat;
 
-Blueprint::Blueprint(int length, int width)
+int Blueprint::id = 0;
+
+Blueprint::Blueprint(string bname, int length, int width)
 {
+	id++;
+	name = bname;
 	areaLength = length;
 	areaWidth = width;
 	buildingAreaArr = new Building**[areaLength];
@@ -32,6 +36,10 @@ Blueprint::Blueprint(int length, int width)
 	tempS = Solar();
 }
 
+string Blueprint::getName() {
+	return this->name;
+}
+
 Blueprint::~Blueprint()
 {
 	for (int i = 0; i < areaLength; i++)
@@ -40,6 +48,8 @@ Blueprint::~Blueprint()
 }
 
 bool Blueprint::isEqualTo(Blueprint b) {
+	if (this->areaLength != b.areaLength || this->areaWidth != b.areaWidth)
+		return false;
 	for (int i = 0; i < this->areaLength; i++)
 	{
 		for (int j = 0; j < this->areaWidth; j++)
@@ -52,28 +62,42 @@ bool Blueprint::isEqualTo(Blueprint b) {
 }
 
 void Blueprint::countAllBuildings() {
+	cout << "in countAllBuildings" << endl;
 	w_count = 0;
 	o_count = 0;
 	x_count = 0;
 	s_count = 0;
+
 	for (int i = 0; i < areaLength; i++)
 	{
+		cout << "erste For schleife" << endl;
 		for (int j = 0; j < areaWidth; j++)
 		{
-			if (buildingAreaArr[i][j]->label == 'W')
-				w_count++;
-			if (buildingAreaArr[i][j]->label == 'O')
+			cout << "zweite For schleife" << endl;
+			if (buildingAreaArr[i][j]->label == 'O') {
 				o_count++;
-			if (buildingAreaArr[i][j]->label == 'X')
+			}
+			cout << "nach 1. if" << endl;
+			if (buildingAreaArr[i][j]->label == 'W') {
+				w_count++;
+			}
+			if (buildingAreaArr[i][j]->label == 'X') {
 				x_count++;
-			if (buildingAreaArr[i][j]->label == 'S')
+			}
+			if (buildingAreaArr[i][j]->label == 'S') {
 				s_count++;
+			}
+			cout << "zweite For schleife ende" << endl;
 		}
 	}
+	cout << "Ende count all" << endl;
 }
 
 float Blueprint::calculateEfficiency() {
+	cout << "in Methode" << endl;
 	this->countAllBuildings();
+
+	cout << "nach count" << endl;
 	int w_power = w_count * tempW.power;
 	int x_power = x_count * tempX.power;
 	int s_power = s_count * tempS.power;
@@ -83,9 +107,17 @@ float Blueprint::calculateEfficiency() {
 	float s_preis = s_count * tempS.grundpreis;
 	float ges_preis = w_preis + x_preis + s_preis;
 	int areaSize = areaLength * areaWidth;
-
-	float k = ges_power / (ges_preis * areaSize);
-	return k;
+	cout << "nach Berechnung einzelwerte" << endl;
+	if (w_count == 0 && x_count == 0 && s_count == 0) {
+		cout << "then";
+		return 0.0f;
+	}
+	else {
+		cout << "else vor";
+		float k = ges_power / (ges_preis * areaSize);
+		cout << "else nach";
+		return k;
+	}
 }
 
 void Blueprint::newBuilding()

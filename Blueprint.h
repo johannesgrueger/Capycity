@@ -7,7 +7,7 @@ namespace Sim_Capycity {
 	class Blueprint
 	{
 	public:
-		Blueprint(int length, int width);
+		Blueprint(string name, int length, int width);
 		~Blueprint();
 
 		void newBuilding();
@@ -24,8 +24,13 @@ namespace Sim_Capycity {
 
 		bool isEqualTo(Blueprint b);
 
-	private:
+		string getName();
+		
+		static int id;
 		Building*** buildingAreaArr;
+
+	private:
+		string name;
 		int areaWidth, areaLength;
 		int temp;
 		int bWidth, bLength;
