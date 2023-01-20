@@ -11,22 +11,19 @@ namespace Sim_Capycity {
 		~Blueprint();
 
 		void newBuilding();
-
 		bool testBuilding();
-
 		void deleteArea();
-
 		void printBuildingPlan();
-
-		void countAllBuildings();
-
+		void countBuildings();
 		float calculateEfficiency();
-
-		bool isEqualTo(Blueprint b);
-
+		bool operator ==(Blueprint b);
 		string getName();
-		
-		static int id;
+		int bID;
+		int w_count = 0;
+		int o_count = 0;
+		int x_count = 0;
+		int s_count = 0;
+		static int idCounter;
 		Building*** buildingAreaArr;
 
 	private:
@@ -40,9 +37,5 @@ namespace Sim_Capycity {
 		Wasserkraft tempW;
 		Windkraft tempX;
 		Solar tempS;
-		int w_count = 0;
-		int o_count = 0;
-		int x_count = 0;
-		int s_count = 0;
 	};
 }

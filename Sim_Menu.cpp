@@ -1,5 +1,6 @@
 #include "Sim_Menu.h"
 #include <iostream>
+#include <algorithm>
 using namespace std; 
 using namespace Sim_Capycity;
 
@@ -42,26 +43,29 @@ void Sim_Menu::createNewBlueprint() {
 	blueprintList.emplace_back(Blueprint(name, length, width));
 }
 
-void Sim_Menu::chooseBlueprint() {
+bool Sim_Menu::chooseBlueprint() {
 	sortBlueprintList();
 	cout << "all available Blueprints: " << endl;
-	string tempString;
-	float tempFloat = 0.0f;
+	//string tempString;
+	//float tempFloat = 0.0f;
+	int i = 1;
 	for(Blueprint b : blueprintList)
 	{
-		tempString = b.getName();
-		tempFloat = b.calculateEfficiency();
-		cout << "Blueprint 1: " << tempString << ", Efficiency K: " << tempFloat << endl;
+		//tempString = b.getName();
+		//tempFloat = b.calculateEfficiency();
+		cout << "Blueprint "  << i << ": " << b.getName() << ", Efficiency K : " << b.calculateEfficiency() << endl;
+		i++;
 	}
 	int inputBlueprintNumber;
 	cout << "Type in Blueprint-Number:" << endl;
 	cin >> inputBlueprintNumber;
-	lastCalledBlueprintID = blueprintList.at(inputBlueprintNumber - 1).id;
+	lastCalledBlueprintID = blueprintList.at(inputBlueprintNumber - 1).bID;
 
 	bool running = true;
 	while (running) {
-		running = printBlueprintMenu(blueprintList.at(inputBlueprintNumber));
+		running = printBlueprintMenu(blueprintList.at(inputBlueprintNumber-1));
 	}
+	return false;
 }
 
 void Sim_Menu::printAllBlueprints() {
@@ -78,7 +82,7 @@ void Sim_Menu::printAllBlueprints() {
 
 
 void Sim_Menu::sortBlueprintList() {
-	auto sortBlueprintLambda = [](Blueprint b1, Blueprint b2) {return (b1.calculateEfficiency() < b2.calculateEfficiency()); };
+	auto sortBlueprintLambda = [](Blueprint b1, Blueprint b2) {return (b1.calculateEfficiency() > b2.calculateEfficiency()); };
 	
 	std::sort(blueprintList.begin(), blueprintList.end(), sortBlueprintLambda);
 
@@ -96,30 +100,28 @@ void Sim_Menu::sortBlueprintList() {
 }
 
 bool Sim_Menu::checkEquality() {
-	
 	bool equal = false;
+	bool retry = false;
 	int input;
 	bool deleteB = false;
-	for (vector<Blueprint>::iterator i = blueprintList.begin(); i != blueprintList.end(); i++)
+	for (Blueprint x : blueprintList)
 	{
-		for (vector<Blueprint>::iterator j = i+1; j != blueprintList.end(); j++)
+		for (Blueprint b : blueprintList)
 		{
-			if (i->isEqualTo(*j)) {
+			if (x == b) {
+				if (x.bID == b.bID)
+					break;
 				equal = true;
-				if (equal) {
-					int retry = false;
 					do {
 						cout << "Your Blueprint is equal to one that's already existing. It will be deleted" << endl << "Proceed? (0: yes, 1: no)" << endl;
 						cin >> input;
 						switch (input) {
-						case 0: deleteB = true; break;
-						case 1: deleteB = false; break;
+						case 0: deleteB = true; retry = false; break;
+						case 1: deleteB = false; retry = false;  break;
 						default: retry = true; cout << "invalid input, retry" << endl;
 						}
 						break;
 					} while (retry);
-				}
-				if (equal)
 					break;
 			}
 			if (equal)
@@ -134,6 +136,22 @@ bool Sim_Menu::checkEquality() {
 
 }
 
+bool Sim_Menu::option4BlueprintMenu() {
+	if (checkEquality()) {
+		for (vector<Blueprint>::iterator i = blueprintList.begin(); i != blueprintList.end(); i++)
+		{
+			if (i->bID == lastCalledBlueprintID) {
+				blueprintList.erase(i);
+				cout << ">> deleted" << endl << endl;
+				break;
+			}
+		}
+		cout << "leaving ..." << endl;
+
+	}
+	return false;
+}
+
 bool Sim_Menu::printBlueprintMenu(Blueprint& area)
 {
 	cout << "*********" << endl << "1: set new Building" << endl << "2: delete Area" << endl << "3: print BuildingArea" << endl << "4: leave Blueprint " << area.getName() << endl << "*********" << endl;
@@ -144,17 +162,8 @@ bool Sim_Menu::printBlueprintMenu(Blueprint& area)
 	case 1: area.newBuilding(); break;
 	case 2: area.deleteArea(); break;
 	case 3: area.printBuildingPlan(); break;
-	case 4: if (checkEquality()) {
-			for (vector<Blueprint>::iterator i = blueprintList.begin(); i != blueprintList.end(); i++)
-			{
-				if (i->id == lastCalledBlueprintID) {
-					blueprintList.erase(i);
-					cout << ">> deleted" << endl << endl;
-				}
-			}
-				cout << "leaving ..." << endl; return false;
-			}
-	default: cout << "invalid input, try again!" << endl; break;
+	case 4: return option4BlueprintMenu(); break;
+	default: cout << "invalid input, try again!" << endl;
 	}
 	return true;
 }

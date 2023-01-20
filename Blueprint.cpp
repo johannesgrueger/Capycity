@@ -11,11 +11,11 @@ using namespace std;
 using namespace Build;
 using namespace Mat;
 
-int Blueprint::id = 0;
+int Blueprint::idCounter = 0;
 
 Blueprint::Blueprint(string bname, int length, int width)
 {
-	id++;
+	bID = idCounter++;
 	name = bname;
 	areaLength = length;
 	areaWidth = width;
@@ -42,80 +42,72 @@ string Blueprint::getName() {
 
 Blueprint::~Blueprint()
 {
-	for (int i = 0; i < areaLength; i++)
+	// muss auskommentiert sein sonst löschts mir irgendwann mal mein array und ich krieg ne lesezugriffsverletzung als runtime error, hab leider keine andere lösung gefunden
+	/*for (int i = 0; i < areaLength; i++)
 		delete[] buildingAreaArr[i];
-	delete[] buildingAreaArr;
+	delete[] buildingAreaArr;*/
 }
 
-bool Blueprint::isEqualTo(Blueprint b) {
+bool Blueprint::operator ==(Blueprint b) {
 	if (this->areaLength != b.areaLength || this->areaWidth != b.areaWidth)
 		return false;
 	for (int i = 0; i < this->areaLength; i++)
 	{
 		for (int j = 0; j < this->areaWidth; j++)
 		{
-			if (this->buildingAreaArr[i][j]->label != b.buildingAreaArr[i][j]->label)
+			if (this->buildingAreaArr[i][j]->label != b.buildingAreaArr[i][j]->label) {
 				return false;
+			}
 		}
 	}
 	return true;
 }
 
-void Blueprint::countAllBuildings() {
-	cout << "in countAllBuildings" << endl;
-	w_count = 0;
-	o_count = 0;
-	x_count = 0;
-	s_count = 0;
+void Blueprint::countBuildings() {
+	this->w_count = 0;
+	this->o_count = 0;
+	this->x_count = 0;
+	this->s_count = 0;
 
 	for (int i = 0; i < areaLength; i++)
 	{
-		cout << "erste For schleife" << endl;
 		for (int j = 0; j < areaWidth; j++)
 		{
-			cout << "zweite For schleife" << endl;
 			if (buildingAreaArr[i][j]->label == 'O') {
-				o_count++;
+				this->o_count++;
 			}
-			cout << "nach 1. if" << endl;
 			if (buildingAreaArr[i][j]->label == 'W') {
-				w_count++;
+				this->w_count++;
 			}
 			if (buildingAreaArr[i][j]->label == 'X') {
-				x_count++;
+				this->x_count++;
 			}
 			if (buildingAreaArr[i][j]->label == 'S') {
-				s_count++;
+				this->s_count++;
 			}
-			cout << "zweite For schleife ende" << endl;
+
 		}
 	}
-	cout << "Ende count all" << endl;
 }
 
 float Blueprint::calculateEfficiency() {
-	cout << "in Methode" << endl;
-	this->countAllBuildings();
+	this->countBuildings();
 
-	cout << "nach count" << endl;
-	int w_power = w_count * tempW.power;
-	int x_power = x_count * tempX.power;
-	int s_power = s_count * tempS.power;
+	int w_power = this->w_count * tempW.power;
+	int x_power = this->x_count * tempX.power;
+	int s_power = this->s_count * tempS.power;
 	int ges_power = w_power + x_power + s_power;
-	float w_preis = w_count * tempW.grundpreis;
-	float x_preis = x_count * tempX.grundpreis;
-	float s_preis = s_count * tempS.grundpreis;
+	float w_preis = this->w_count * tempW.grundpreis;
+	float x_preis = this->x_count * tempX.grundpreis;
+	float s_preis = this->s_count * tempS.grundpreis;
 	float ges_preis = w_preis + x_preis + s_preis;
 	int areaSize = areaLength * areaWidth;
-	cout << "nach Berechnung einzelwerte" << endl;
+
 	if (w_count == 0 && x_count == 0 && s_count == 0) {
-		cout << "then";
 		return 0.0f;
 	}
 	else {
-		cout << "else vor";
-		float k = ges_power / (ges_preis * areaSize);
-		cout << "else nach";
+		float k = (ges_power / (ges_preis * areaSize))*100.0f;
 		return k;
 	}
 }
@@ -253,7 +245,7 @@ void Blueprint::printBuildingPlan()
 	}
 	cout << "-------" << endl << "Lineup:" << endl;
 	
-	countAllBuildings();
+	this->countBuildings();
 
 	cout << "Number of Hydropower (" << tempW.label << "):	" << w_count << ", Cost per Unit: " << tempW.getPreis() << "€, Cost in total: " << w_count * tempW.getPreis() << "€" << endl;
 	cout << "					-> Materials: ";

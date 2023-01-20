@@ -12,10 +12,11 @@ namespace Sim_Capycity {
 		bool printMenu();
 		bool printBlueprintMenu(Blueprint& area);
 		void createNewBlueprint();
-		void chooseBlueprint();
+		bool chooseBlueprint();
 		void sortBlueprintList();
 		void printAllBlueprints();
 		bool checkEquality();
+		bool option4BlueprintMenu();
 
 	private:
 		int input;
