@@ -93,22 +93,30 @@ void Blueprint::countBuildings() {
 float Blueprint::calculateEfficiency() {
 	this->countBuildings();
 
-	int w_power = this->w_count * tempW.power;
+	/*int w_power = this->w_count * tempW.power;
 	int x_power = this->x_count * tempX.power;
 	int s_power = this->s_count * tempS.power;
-	int ges_power = w_power + x_power + s_power;
-	float w_preis = this->w_count * tempW.grundpreis;
+	int ges_power = w_power + x_power + s_power;*/
+
+	//int ges_power = this->w_count * tempW.power + this->x_count * tempX.power + this->s_count * tempS.power;
+
+	/*float w_preis = this->w_count * tempW.grundpreis;
 	float x_preis = this->x_count * tempX.grundpreis;
 	float s_preis = this->s_count * tempS.grundpreis;
-	float ges_preis = w_preis + x_preis + s_preis;
-	int areaSize = areaLength * areaWidth;
+	float ges_preis = w_preis + x_preis + s_preis;*/
+
+	//float ges_preis = this->w_count * tempW.grundpreis + this->x_count * tempX.grundpreis + this->s_count * tempS.grundpreis;
+
+	//int areaSize = areaLength * areaWidth;
 
 	if (w_count == 0 && x_count == 0 && s_count == 0) {
 		return 0.0f;
 	}
 	else {
-		float k = (ges_power / (ges_preis * areaSize))*100.0f;
-		return k;
+		//float k = (ges_power / (ges_preis * areaSize))*100.0f;
+		//double k = ((this->w_count * tempW.power + this->x_count * tempX.power + this->s_count * tempS.power) / ((this->w_count * tempW.grundpreis + this->x_count * tempX.grundpreis + this->s_count * tempS.grundpreis) * (areaLength * areaWidth))) * 100.0;
+		//return k;
+		return ((this->w_count * tempW.power + this->x_count * tempX.power + this->s_count * tempS.power) / ((this->w_count * tempW.grundpreis + this->x_count * tempX.grundpreis + this->s_count * tempS.grundpreis) * (areaLength * areaWidth))) * 100.0;
 	}
 }
 
